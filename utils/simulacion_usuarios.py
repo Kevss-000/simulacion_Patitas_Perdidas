@@ -1,39 +1,43 @@
+#simulando datos de la tabla USUARIOS en PYTHON
+
 import random
-import string
-from datetime import datetime, timedelta
 
-def generar_simulacion(numeroSimulaciones):
+def generar_usuarios(cantidad):
 
-    fecha_base = datetime(2026, 1, 2)
+    listaNombres=["Carlos Perez","Ana Gomez","Luis Martinez","Maria Lopez",
+                  "Jorge Rodriguez","Sofia Hernandez","Andres Torres","Valentina Diaz",
+                  "Felipe Vargas","Isabella Mora","Samuel Castro","Daniela Rios"]
 
-    simulaciones = []
+    listaDominios=["gmail.com","hotmail.com","yahoo.com","outlook.com"]
 
-    for i in range(numeroSimulaciones):
-        simulacion = {
-            "idusuario": str(random.randint(1000, 9999)),
-            "nomusuario": random.choice(["Kevin", "Ana", "Luis", "Maria", "Carlos"]),
-            "dirusuario": random.choice(["Bello", "Medellin", "Itagui", "Envigado"]),
-            "telusuario": str(random.randint(3000000000, 3999999999)),
-            "correousuario": f"user{i}@correo.com",
-            "contrausuario": ''.join(random.choices(string.ascii_letters + string.digits, k=8)),
-            "activo": random.choice(["SI", "NO"]),
-            "fecha": fecha_base + timedelta(days=random.randint(0, 60))
+    usuarios=[]
+
+    for i in range(cantidad):
+        nombre=random.choice(listaNombres)
+        primer_nombre=nombre.split()[0].lower()
+        correo=f"{primer_nombre}{random.randint(1,99)}@{random.choice(listaDominios)}"
+        telefono=f"3{random.randint(100000000,199999999)}"
+        contrasena=f"Pass{random.randint(1000,9999)}!"
+
+        usuario={
+            "id_usuario": i + 1,
+            "nombre": nombre,
+            "correo": correo,
+            "telefono": telefono,
+            "contrasena": contrasena,
         }
 
-        # Inyectando errores controlados
-        probabilidadError = random.random()
-        if probabilidadError < 0.15:
-            simulacion["idusuario"] = None
-        elif probabilidadError < 0.25:
-            simulacion["idusuario"] = "-10"  
-            simulacion["fecha"] = None
-        elif probabilidadError < 0.70:
-            simulacion["telusuario"] = "12345"  
-        elif probabilidadError < 0.55:
-            simulacion["dirusuario"] = "Bogota"
-        elif probabilidadError < 0.40:
-            simulacion["nomusuario"] = "   " + simulacion["nomusuario"].upper() + "   "
+        #inyectando errores controlados
+        probabilidadError=random.random()
 
-        simulaciones.append(simulacion)
+        if probabilidadError<0.1:
+            usuario["correo"]=usuario["correo"].replace("@","")
+        elif probabilidadError<0.2:
+            usuario["correo"]=None
+        elif probabilidadError<0.3:
+            usuario["telefono"]="TEL-"+usuario["telefono"][:5]+"XX"
+        elif probabilidadError<0.4:
+            usuario["nombre"]=None
 
-    return simulaciones
+        usuarios.append(usuario)
+    return usuarios
