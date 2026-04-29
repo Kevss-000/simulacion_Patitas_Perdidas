@@ -1,6 +1,6 @@
 import pandas as pd
 
-def limpiar_simulaciones(data_frame_sucio):
+def limpiar_ubicaciones(data_frame_sucio):
     data_frame_limpio=data_frame_sucio.copy()
 
     #rutina para evaluar textos 
