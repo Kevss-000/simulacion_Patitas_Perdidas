@@ -1,9 +1,9 @@
 import pandas as pd
 
-from utils.simulacion_usuarios import generar_usuarios
-from utils.simulacion_mascotas import generar_mascotas
-from utils.simulacion_reportes import generar_reportes
-from utils.simulacion_imagenes import generar_imagenes
+from utils.simulacion_usuarios import generar_simulacion
+from notebook.limpieza_usuarios import limpiar_simulasiones
+from notebook.limpieza_ubicaciones import limpiar_simulaciones
+from utils.simulacion_ubicaciones import generar_ubicaciones
 
 from notebook.limpieza_usuarios import limpiar_usuarios
 from notebook.limpieza_mascotas import limpiar_mascotas
